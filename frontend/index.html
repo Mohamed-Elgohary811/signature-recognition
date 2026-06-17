@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Signature Verification System</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar" aria-label="Application header">
+      <a class="brand" href="/ui" aria-label="AI Signature Verification System">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path d="M4 15.2c2.5-4.6 4.5-6.9 6-6.9 1.8 0 1.3 5.1 3 5.1 1.1 0 2.1-1.4 3-4.1.7 2.7 2 4.1 4 4.1" />
+            <path d="M4 18h16" />
+          </svg>
+        </span>
+        <span>Signature AI</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/docs">API Docs</a>
+        <a href="/train/status">Training Status</a>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"></path>
+        </svg>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="heroTitle">
+        <canvas id="signalCanvas" aria-hidden="true"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Machine Learning Verification</p>
+          <h1 id="heroTitle">AI Signature Verification System</h1>
+          <p class="hero-copy">
+            Detect whether a signature is Genuine or Forged using Machine Learning, confidence scoring, and probability analysis.
+          </p>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Signature analysis workspace">
+        <div class="upload-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-kicker">Analyze</p>
+              <h2>Signature Image</h2>
+            </div>
+            <span class="status-pill" id="connectionStatus">Ready</span>
+          </div>
+
+          <form id="predictionForm">
+            <label class="dropzone" id="dropzone" for="signatureInput">
+              <input id="signatureInput" name="image_file" type="file" accept="image/*">
+              <span class="upload-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <path d="M17 8l-5-5-5 5"></path>
+                  <path d="M12 3v12"></path>
+                </svg>
+              </span>
+              <span class="drop-title">Drop signature image here</span>
+              <span class="drop-subtitle">PNG, JPG, JPEG, or WEBP</span>
+            </label>
+
+            <div class="preview-wrap" id="previewWrap" hidden>
+              <img id="imagePreview" alt="Selected signature preview">
+              <button class="icon-button" id="clearImage" type="button" aria-label="Remove selected image">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18 6 6 18"></path>
+                  <path d="m6 6 12 12"></path>
+                </svg>
+              </button>
+            </div>
+
+            <button class="analyze-button" id="analyzeButton" type="submit" disabled>
+              <span class="button-loader" aria-hidden="true"></span>
+              <span class="button-label">Analyze Signature</span>
+            </button>
+          </form>
+        </div>
+
+        <aside class="result-panel" aria-live="polite">
+          <div class="panel-header">
+            <div>
+              <p class="section-kicker">Result</p>
+              <h2>Verification Output</h2>
+            </div>
+            <span class="result-dot" id="resultDot" aria-hidden="true"></span>
+          </div>
+
+          <div class="empty-state" id="emptyState">
+            <div class="empty-orbit" aria-hidden="true"></div>
+            <p>Upload a signature to view prediction confidence and class probabilities.</p>
+          </div>
+
+          <div class="result-card" id="resultCard" hidden>
+            <div class="prediction-row">
+              <span class="prediction-label">Prediction</span>
+              <strong id="predictionText">-</strong>
+            </div>
+
+            <div class="confidence-meter">
+              <span>Confidence Score</span>
+              <strong id="confidenceText">0%</strong>
+            </div>
+
+            <div class="probabilities">
+              <div class="probability-item genuine">
+                <div class="probability-header">
+                  <span>Genuine</span>
+                  <strong id="genuinePercent">0%</strong>
+                </div>
+                <div class="progress-track">
+                  <span id="genuineBar"></span>
+                </div>
+              </div>
+
+              <div class="probability-item forged">
+                <div class="probability-header">
+                  <span>Forged</span>
+                  <strong id="forgedPercent">0%</strong>
+                </div>
+                <div class="progress-track">
+                  <span id="forgedBar"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="error-box" id="errorBox" hidden></div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Signature Recognition System</p>
+      <span>FastAPI · Machine Learning · Image Classification</span>
+    </footer>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

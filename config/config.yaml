@@ -1,0 +1,41 @@
+# Stores all project configurations such as file paths, model settings, training parameters, and storage settings.
+
+data_ingestion_config:
+  zip_file_name: dataset.zip
+  source_data_path: notebook/data.zip
+  bucket_name: sig-recog
+
+
+data_transformation_config:
+  img_size: 224
+  degree_n: -20
+  degree_p: +20
+  train_ratio: 0.6
+  valid_ratio: 0.3
+  std: [0.229, 0.224, 0.225]
+  mean: [0.485, 0.456, 0.406]
+
+model_trainer_config:
+  lr: 0.001
+  epochs: 1
+  num_workers: 4
+  batch_size: 32
+
+
+model_evaluation_config:
+  batch_size: 32
+  num_workers: 4
+  bucket_name: sig-recog
+
+
+
+model_pusher_config:
+  bucket_name: sig-recog
+
+
+
+prediction_pipeline_config:
+  input_image: input.jpg
+  bucket_name: sig-recog
+  model_name: model.pt
+  threshold: 0.3

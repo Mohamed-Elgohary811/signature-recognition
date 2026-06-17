@@ -1,0 +1,32 @@
+# Base dependencies
+numpy
+pandas
+matplotlib
+tqdm
+Pillow
+PyYAML
+Jinja2
+dill==0.3.5.1
+
+# Computer Vision & Deep Learning
+torch
+torch-summary
+opencv-python
+albumentations
+# pycocotools (Uncomment if needed locally)
+
+# Backend & API
+fastapi
+uvicorn
+python-multipart
+
+# Orchestration & Cloud
+google-cloud-storage
+apache-airflow==2.4.3
+
+# Development
+ipykernel
+cython
+
+# Local project
+-e .
