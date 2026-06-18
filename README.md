@@ -309,14 +309,4 @@ Mohamed Elgohary
 Machine Learning Engineer | AI Enthusiast
 
 Feel free to connect, provide feedback, or contribute to the project.
-
-
-
-
-
-
-
-
-
-link of dataset:
-https://www.kaggle.com/datasets/tienen/handwritten-signature-verification
+[GitHub](https://github.com/Mohamed-Elgohary811) | [LinkedIn](https://www.linkedin.com/feed/)
