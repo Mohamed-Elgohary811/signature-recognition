@@ -306,7 +306,7 @@ https://github.com/Mohamed-Elgohary811/signature-recognition
 
 Mohamed Elgohary
 
-Machine Learning Engineer | AI Enthusiast
+Data Scientist | AI & Machine Learning Practitioner
 
 Feel free to connect, provide feedback, or contribute to the project.
 [GitHub](https://github.com/Mohamed-Elgohary811) | [LinkedIn](https://www.linkedin.com/feed/)
